@@ -4,9 +4,14 @@
 #include "BasePacket.h"
 
 class LoginResponsePacket : public BasePacket{
-public:
+private:
     uint16_t receivedPacketIndex;
 
+public:
+    void setReceivedPacketIndex(uint16_t receivedPacketIndex);
+    uint16_t getReceivedPacketIndex() const;
+
+    LoginResponsePacket();
     bool DeserializePacketBody(const std::vector<uint8_t>& buffer, size_t& offset);
     bool Deserialize(const std::vector<uint8_t>& buffer);
     void PrintInformation();

@@ -1,5 +1,25 @@
 #include "../include/LoginPacket.h"
 
+void LoginPacket::setUsername(const std::string& username) {
+    this->username = username;
+}
+
+void LoginPacket::setPassword(const std::string& password) {
+    this->password = password;
+}
+
+std::string LoginPacket::getUsername() const {
+    return username;
+}
+
+std::string LoginPacket::getPassword() const {
+    return password;
+}
+
+LoginPacket::LoginPacket() {
+    this->setPacketId(2);
+}
+
 void LoginPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
     SerializeString(buffer, username);
     SerializeString(buffer, password);
@@ -7,7 +27,7 @@ void LoginPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
 
 std::vector<uint8_t> LoginPacket::Serialize() const {
     std::vector<uint8_t> buffer;
-    buffer.reserve(2 + 2 + deviceId.size() + 2 + username.size() + password.size() + 2 + 2);
+    buffer.reserve(2 + 2 + this->getDeviceId().size() + 2 + this->getUsername().size() + this->getPassword().size() + 2 + 2);
 
     SerializePacketStarting(buffer);
     SerializePacketBody(buffer);

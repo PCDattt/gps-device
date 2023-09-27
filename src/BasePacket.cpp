@@ -1,5 +1,52 @@
 #include "../include/BasePacket.h"
 
+void BasePacket::setStartMarker(uint16_t startMarker) {
+    this->startMarker = startMarker;
+}
+
+void BasePacket::setPacketId(uint16_t packetId) {
+    this->packetId = packetId;
+}
+
+void BasePacket::setDeviceId(const std::string& deviceId) {
+    this->deviceId = deviceId;
+}
+
+void BasePacket::setPacketOrderIndex(uint16_t packetOrderIndex) {
+    this->packetOrderIndex = packetOrderIndex;
+}
+
+void BasePacket::setChecksum(uint16_t checksum) {
+    this->checksum = checksum;
+}
+
+void BasePacket::setEndMarker(uint16_t endMarker) {
+    this->endMarker = endMarker;
+}
+
+uint16_t BasePacket::getStartMarker() const {
+    return startMarker;
+}
+
+uint16_t BasePacket::getPacketId() const {
+    return packetId;
+}
+
+std::string BasePacket::getDeviceId() const {
+    return deviceId;
+}
+
+uint16_t BasePacket::getPacketOrderIndex() const {
+    return packetOrderIndex;
+}
+
+uint16_t BasePacket::getChecksum() const {
+    return checksum;
+}
+
+uint16_t BasePacket::getEndMarker() const {
+    return endMarker;
+}
 
 // Helper function to serialize a uint16_t into the buffer
 void BasePacket::SerializeUInt16(std::vector<uint8_t>& buffer, uint16_t value) const {
@@ -89,7 +136,6 @@ bool BasePacket::DeserializePacketEnding(const std::vector<uint8_t>& buffer, siz
 
 void BasePacket::FillStartingInformation() {
     startMarker = 0x0001;
-    packetId = 0;
     deviceId = "123456";
     packetOrderIndex = 1;
 }

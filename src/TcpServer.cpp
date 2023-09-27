@@ -38,7 +38,6 @@ int connectTcpServer() {
         // Create packet
         BasePacket* packet = PacketFactory::GetPacket(packetId);
         packet->FillInformation();
-        packet->packetId = packetId;
         std::vector<uint8_t> serializedPacket = packet->Serialize();
 
         // Send packet
