@@ -141,6 +141,27 @@ void BasePacket::FillStartingInformation() {
 }
 
 void BasePacket::FillEndingInformation() {
-    checksum = 0x0003;
+    checksum = CalculateChecksum();
     endMarker = 0x0004;
+}
+
+void BasePacket::ProcessPacketStartingForChecksum(boost::crc_32_type &result) {
+    result.process_bytes(&startMarker, sizeof(startMarker));
+    result.process_bytes(&packetId, sizeof(packetId));
+    result.process_bytes(deviceId.c_str(), deviceId.length());
+    result.process_bytes(&packetOrderIndex, sizeof(packetOrderIndex));
+}
+
+uint16_t BasePacket::CalculateChecksum() {
+    boost::crc_32_type result;
+
+    ProcessPacketStartingForChecksum(result);
+    ProcessPacketBodyForChecksum(result);
+
+    uint32_t fullChecksum = result.checksum();
+    return static_cast<uint16_t>(fullChecksum & 0xFFFF);
+}
+
+bool BasePacket::ValidateChecksum() {
+    return this->CalculateChecksum() == this->getChecksum();
 }

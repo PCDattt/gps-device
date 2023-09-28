@@ -65,7 +65,13 @@ int connectTcpServer() {
         BasePacket* responsePacket;
         responsePacket = PacketFactory::GetPacket(packetId + 1);
         responsePacket->Deserialize(receiveBuffer);
-        responsePacket->PrintInformation();
+        if (responsePacket->ValidateChecksum()) {
+            std::cout << "Checksum is correct" << std::endl;
+            responsePacket->PrintInformation();
+        }
+        else {
+            std::cout << "Checksum is incorrect" << std::endl;
+        }
 
         // Free memory
         delete packet;

@@ -35,3 +35,7 @@ void InformationResponsePacket::PrintInformation() {
     std::cout << "Response packet checksum: " << this->getChecksum() << std::endl;
     std::cout << "Response packet endMarker: " << this->getEndMarker() << std::endl << std::endl;
 }
+
+void InformationResponsePacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {
+    result.process_bytes(&this->receivedPacketIndex, sizeof(this->receivedPacketIndex));
+}

@@ -46,3 +46,8 @@ void LoginPacket::FillInformation() {
     FillBodyInformation();
     FillEndingInformation();
 }
+
+void LoginPacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {
+    result.process_bytes(username.c_str(), username.length());
+    result.process_bytes(password.c_str(), password.length());
+}

@@ -50,6 +50,11 @@ public:
     virtual void FillInformation() {};
     
     virtual void PrintInformation() {};
+
+    void ProcessPacketStartingForChecksum(boost::crc_32_type &result);
+    virtual void ProcessPacketBodyForChecksum(boost::crc_32_type &result) {};
+    uint16_t CalculateChecksum();
+    bool ValidateChecksum();
 };
 
 #endif

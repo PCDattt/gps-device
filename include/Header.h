@@ -11,6 +11,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <openssl/md5.h>
+#include <boost/crc.hpp>
 
 int connectTcpServer();
 uint16_t CalculateChecksum(const std::vector<uint8_t>& buffer);
