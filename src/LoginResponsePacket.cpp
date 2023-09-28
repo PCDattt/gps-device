@@ -17,14 +17,8 @@ bool LoginResponsePacket::DeserializePacketBody(const std::vector<uint8_t>& buff
     return true;
 }
 
-void LoginResponsePacket::PrintInformation() {
-    std::cout << "Response packet startMarker: " << this->getStartMarker() << std::endl;
-    std::cout << "Response packet packetId: " << this->getPacketId() << std::endl;
-    std::cout << "Response packet deviceId: " << this->getDeviceId() << std::endl;
-    std::cout << "Response packet packetOrderIndex: " << this->getPacketOrderIndex() << std::endl;
+void LoginResponsePacket::PrintBodyInformation() {
     std::cout << "Received packet index: " << this->getReceivedPacketIndex() << std::endl;
-    std::cout << "Response packet checksum: " << this->getChecksum() << std::endl;
-    std::cout << "Response packet endMarker: " << this->getEndMarker() << std::endl << std::endl;
 }
 
 void LoginResponsePacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {

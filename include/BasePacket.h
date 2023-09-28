@@ -50,7 +50,8 @@ public:
     bool DeserializePacketEnding(const std::vector<uint8_t>& buffer, size_t& offset);
     bool Deserialize(const std::vector<uint8_t>& buffer);
     
-    virtual void PrintInformation() {};
+    virtual void PrintBodyInformation() {};
+    void PrintInformation();
 
     void ProcessPacketStartingForChecksum(boost::crc_32_type &result);
     virtual void ProcessPacketBodyForChecksum(boost::crc_32_type &result) {};
