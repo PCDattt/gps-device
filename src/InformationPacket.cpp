@@ -41,12 +41,6 @@ void InformationPacket::FillBodyInformation() {
     longitude = 456;
 }
 
-void InformationPacket::FillInformation() {
-    FillStartingInformation();
-    FillBodyInformation();
-    FillEndingInformation();
-}
-
 void InformationPacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {
     result.process_bytes(&this->latitude, sizeof(this->latitude));
     result.process_bytes(&this->longitude, sizeof(this->longitude));

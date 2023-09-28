@@ -145,6 +145,12 @@ void BasePacket::FillEndingInformation() {
     endMarker = 0x0004;
 }
 
+void BasePacket::FillInformation() {
+    FillStartingInformation();
+    FillBodyInformation();
+    FillEndingInformation();
+}
+
 void BasePacket::ProcessPacketStartingForChecksum(boost::crc_32_type &result) {
     result.process_bytes(&startMarker, sizeof(startMarker));
     result.process_bytes(&packetId, sizeof(packetId));

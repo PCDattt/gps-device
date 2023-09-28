@@ -19,7 +19,6 @@ public:
     void SerializePacketBody(std::vector<uint8_t>& buffer) const;
     std::vector<uint8_t> Serialize() const;
     void FillBodyInformation();
-    void FillInformation();
 
     void ProcessPacketBodyForChecksum(boost::crc_32_type &result);
     uint16_t CalculateChecksum();

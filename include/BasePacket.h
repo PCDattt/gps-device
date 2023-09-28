@@ -47,7 +47,7 @@ public:
     void FillStartingInformation();
     virtual void FillBodyInformation() {};
     void FillEndingInformation();
-    virtual void FillInformation() {};
+    void FillInformation();
     
     virtual void PrintInformation() {};
 
