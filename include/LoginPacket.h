@@ -16,12 +16,11 @@ public:
     std::string getPassword() const;
 
     LoginPacket();
-    void SerializePacketBody(std::vector<uint8_t>& buffer) const;
-    std::vector<uint8_t> GetPacketBuffer() const;
     void FillBodyInformation();
+    std::vector<uint8_t> GetPacketBuffer() const;
+    void SerializePacketBody(std::vector<uint8_t>& buffer) const;
 
     void ProcessPacketBodyForChecksum(boost::crc_32_type &result);
-    uint16_t CalculateChecksum();
 };
 
 #endif

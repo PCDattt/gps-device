@@ -13,7 +13,6 @@ public:
 
     InformationResponsePacket();
     bool DeserializePacketBody(const std::vector<uint8_t>& buffer, size_t& offset);
-    bool Deserialize(const std::vector<uint8_t>& buffer);
     void PrintInformation();
 
     void ProcessPacketBodyForChecksum(boost::crc_32_type &result);

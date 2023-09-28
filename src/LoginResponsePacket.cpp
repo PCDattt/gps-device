@@ -17,15 +17,6 @@ bool LoginResponsePacket::DeserializePacketBody(const std::vector<uint8_t>& buff
     return true;
 }
 
-bool LoginResponsePacket::Deserialize(const std::vector<uint8_t>& buffer) {
-    size_t offset = 0;
-    if (!DeserializePacketStarting(buffer, offset)) return false;
-    if (!DeserializePacketBody(buffer, offset)) return false;
-    if (!DeserializePacketEnding(buffer, offset)) return false;
-
-    return true;
-}
-
 void LoginResponsePacket::PrintInformation() {
     std::cout << "Response packet startMarker: " << this->getStartMarker() << std::endl;
     std::cout << "Response packet packetId: " << this->getPacketId() << std::endl;

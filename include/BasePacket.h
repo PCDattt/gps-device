@@ -34,6 +34,11 @@ public:
     bool DeserializeUInt32(const std::vector<uint8_t>& buffer, size_t& offset, uint32_t& value) const;
     bool DeserializeString(const std::vector<uint8_t>& buffer, size_t& offset, std::string& value) const;
     
+    void FillStartingInformation();
+    virtual void FillBodyInformation() {};
+    void FillEndingInformation();
+    void FillInformation();
+
     void SerializePacketStarting(std::vector<uint8_t>& buffer) const;
     virtual void SerializePacketBody(std::vector<uint8_t>& buffer) const {};
     void SerializePacketEnding(std::vector<uint8_t>& buffer) const;
@@ -43,12 +48,7 @@ public:
     bool DeserializePacketStarting(const std::vector<uint8_t>& buffer, size_t& offset);
     virtual bool DeserializePacketBody(const std::vector<uint8_t>& buffer, size_t& offset) {};
     bool DeserializePacketEnding(const std::vector<uint8_t>& buffer, size_t& offset);
-    virtual bool Deserialize(const std::vector<uint8_t>& buffer) {};
-
-    void FillStartingInformation();
-    virtual void FillBodyInformation() {};
-    void FillEndingInformation();
-    void FillInformation();
+    bool Deserialize(const std::vector<uint8_t>& buffer);
     
     virtual void PrintInformation() {};
 

@@ -108,6 +108,23 @@ bool BasePacket::DeserializeString(const std::vector<uint8_t>& buffer, size_t& o
     return true;
 }
 
+void BasePacket::FillStartingInformation() {
+    startMarker = 0x0001;
+    deviceId = "123456";
+    packetOrderIndex = 1;
+}
+
+void BasePacket::FillEndingInformation() {
+    checksum = CalculateChecksum();
+    endMarker = 0x0004;
+}
+
+void BasePacket::FillInformation() {
+    FillStartingInformation();
+    FillBodyInformation();
+    FillEndingInformation();
+}
+
 void BasePacket::SerializePacketStarting(std::vector<uint8_t>& buffer) const {
     SerializeUInt16(buffer, startMarker);
     SerializeUInt16(buffer, packetId);
@@ -145,21 +162,13 @@ bool BasePacket::DeserializePacketEnding(const std::vector<uint8_t>& buffer, siz
     return true;
 }
 
-void BasePacket::FillStartingInformation() {
-    startMarker = 0x0001;
-    deviceId = "123456";
-    packetOrderIndex = 1;
-}
+bool BasePacket::Deserialize(const std::vector<uint8_t>& buffer) {
+    size_t offset = 0;
+    if (!DeserializePacketStarting(buffer, offset)) return false;
+    if (!DeserializePacketBody(buffer, offset)) return false;
+    if (!DeserializePacketEnding(buffer, offset)) return false;
 
-void BasePacket::FillEndingInformation() {
-    checksum = CalculateChecksum();
-    endMarker = 0x0004;
-}
-
-void BasePacket::FillInformation() {
-    FillStartingInformation();
-    FillBodyInformation();
-    FillEndingInformation();
+    return true;
 }
 
 void BasePacket::ProcessPacketStartingForChecksum(boost::crc_32_type &result) {

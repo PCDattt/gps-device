@@ -20,9 +20,9 @@ LoginPacket::LoginPacket() {
     this->setPacketId(2);
 }
 
-void LoginPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
-    SerializeString(buffer, username);
-    SerializeString(buffer, password);
+void LoginPacket::FillBodyInformation() {
+    username = "username";
+    password = "password";
 }
 
 std::vector<uint8_t> LoginPacket::GetPacketBuffer() const {
@@ -31,9 +31,9 @@ std::vector<uint8_t> LoginPacket::GetPacketBuffer() const {
     return buffer;
 }
 
-void LoginPacket::FillBodyInformation() {
-    username = "username";
-    password = "password";
+void LoginPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
+    SerializeString(buffer, username);
+    SerializeString(buffer, password);
 }
 
 void LoginPacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {

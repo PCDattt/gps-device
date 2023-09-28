@@ -20,9 +20,9 @@ InformationPacket::InformationPacket() {
     this->setPacketId(0);
 }
 
-void InformationPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
-    SerializeUInt32(buffer, latitude);
-    SerializeUInt32(buffer, longitude);
+void InformationPacket::FillBodyInformation() {
+    latitude = 123;
+    longitude = 456;
 }
 
 std::vector<uint8_t> InformationPacket::GetPacketBuffer() const {
@@ -31,9 +31,9 @@ std::vector<uint8_t> InformationPacket::GetPacketBuffer() const {
     return buffer;
 }
 
-void InformationPacket::FillBodyInformation() {
-    latitude = 123;
-    longitude = 456;
+void InformationPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
+    SerializeUInt32(buffer, latitude);
+    SerializeUInt32(buffer, longitude);
 }
 
 void InformationPacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {
