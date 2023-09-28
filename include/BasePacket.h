@@ -37,7 +37,8 @@ public:
     void SerializePacketStarting(std::vector<uint8_t>& buffer) const;
     virtual void SerializePacketBody(std::vector<uint8_t>& buffer) const {};
     void SerializePacketEnding(std::vector<uint8_t>& buffer) const;
-    virtual std::vector<uint8_t> Serialize() const {};
+    virtual std::vector<uint8_t> GetPacketBuffer() const {};
+    std::vector<uint8_t> Serialize() const;
 
     bool DeserializePacketStarting(const std::vector<uint8_t>& buffer, size_t& offset);
     virtual bool DeserializePacketBody(const std::vector<uint8_t>& buffer, size_t& offset) {};
@@ -47,7 +48,7 @@ public:
     void FillStartingInformation();
     virtual void FillBodyInformation() {};
     void FillEndingInformation();
-    virtual void FillInformation() {};
+    void FillInformation();
     
     virtual void PrintInformation() {};
 

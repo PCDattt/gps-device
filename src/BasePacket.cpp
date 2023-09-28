@@ -120,6 +120,17 @@ void BasePacket::SerializePacketEnding(std::vector<uint8_t>& buffer) const {
     SerializeUInt16(buffer, endMarker);
 }
 
+std::vector<uint8_t> BasePacket::Serialize() const {
+    std::vector<uint8_t> buffer;
+    buffer = GetPacketBuffer();
+
+    SerializePacketStarting(buffer);
+    SerializePacketBody(buffer);
+    SerializePacketEnding(buffer);
+
+    return buffer;
+}
+
 bool BasePacket::DeserializePacketStarting(const std::vector<uint8_t>& buffer, size_t& offset) {
     if (!DeserializeUInt16(buffer, offset, startMarker)) return false;
     if (!DeserializeUInt16(buffer, offset, packetId)) return false;
@@ -143,6 +154,12 @@ void BasePacket::FillStartingInformation() {
 void BasePacket::FillEndingInformation() {
     checksum = CalculateChecksum();
     endMarker = 0x0004;
+}
+
+void BasePacket::FillInformation() {
+    FillStartingInformation();
+    FillBodyInformation();
+    FillEndingInformation();
 }
 
 void BasePacket::ProcessPacketStartingForChecksum(boost::crc_32_type &result) {
