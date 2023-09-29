@@ -21,8 +21,10 @@ InformationPacket::InformationPacket() {
 }
 
 void InformationPacket::FillBodyInformation() {
-    latitude = 123;
-    longitude = 456;
+    std::cout << "Enter latitude: ";
+    std::cin >> latitude;
+    std::cout << "Enter longitude: ";
+    std::cin >> longitude;
 }
 
 std::vector<uint8_t> InformationPacket::GetPacketBuffer() const {

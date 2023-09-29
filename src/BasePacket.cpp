@@ -172,13 +172,13 @@ bool BasePacket::Deserialize(const std::vector<uint8_t>& buffer) {
 }
 
 void BasePacket::PrintInformation() {
-    std::cout << "Packet startMarker: " << this->getStartMarker() << std::endl;
-    std::cout << "Packet packetId: " << this->getPacketId() << std::endl;
-    std::cout << "Packet deviceId: " << this->getDeviceId() << std::endl;
-    std::cout << "Packet packetOrderIndex: " << this->getPacketOrderIndex() << std::endl;
+    std::cout << "Packet start marker: " << this->getStartMarker() << std::endl;
+    std::cout << "Packet id: " << this->getPacketId() << std::endl;
+    std::cout << "Packet device id: " << this->getDeviceId() << std::endl;
+    std::cout << "Packet order index: " << this->getPacketOrderIndex() << std::endl;
     PrintBodyInformation();
     std::cout << "Packet checksum: " << this->getChecksum() << std::endl;
-    std::cout << "Packet endMarker: " << this->getEndMarker() << std::endl << std::endl;
+    std::cout << "Packet end marker: " << this->getEndMarker() << std::endl << std::endl;
 }
 
 void BasePacket::ProcessPacketStartingForChecksum(boost::crc_32_type &result) {

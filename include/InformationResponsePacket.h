@@ -16,7 +16,6 @@ public:
     void PrintBodyInformation();
 
     void ProcessPacketBodyForChecksum(boost::crc_32_type &result);
-    uint16_t CalculateChecksum();
 };
 
 #endif

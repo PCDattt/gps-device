@@ -21,8 +21,10 @@ LoginPacket::LoginPacket() {
 }
 
 void LoginPacket::FillBodyInformation() {
-    username = "username";
-    password = "password";
+    std::cout << "Enter username: ";
+    std::cin >> username;
+    std::cout << "Enter password: ";
+    std::cin >> password;
 }
 
 std::vector<uint8_t> LoginPacket::GetPacketBuffer() const {

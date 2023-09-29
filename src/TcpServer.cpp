@@ -48,7 +48,7 @@ int connectTcpServer() {
         }
         else {
             std::cout << "Sent information packet successfully" << std::endl;
-            std::cout << "Sent " << bytesSent << " bytes" << std::endl;
+            std::cout << "Sent " << bytesSent << " bytes" << std::endl << std::endl;
         }
         
         // Receive the response packet
@@ -65,6 +65,7 @@ int connectTcpServer() {
         BasePacket* responsePacket;
         responsePacket = PacketFactory::GetPacket(packetId + 1);
         responsePacket->Deserialize(receiveBuffer);
+        std::cout << "Received response packet" << std::endl;
         if (responsePacket->ValidateChecksum()) {
             std::cout << "Checksum is correct" << std::endl;
             responsePacket->PrintInformation();
