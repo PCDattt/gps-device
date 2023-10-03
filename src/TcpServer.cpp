@@ -28,9 +28,11 @@ int connectTcpServer() {
     int choice;
     // Send and receive messages
     while (true) {
+        std::cout << "Enter 0 to disconnect " << std::endl;
         std::cout << "Enter 1 to send information packet " << std::endl;
         std::cout << "Enter 2 to send login packet " << std::endl;
         std::cin >> choice;
+        if(choice == 0) break;
         uint16_t packetId;
         if (choice == 1) packetId = 0;
         else packetId = 2;
@@ -39,6 +41,8 @@ int connectTcpServer() {
         BasePacket* packet = PacketFactory::GetPacket(packetId);
         packet->FillInformation();
         std::vector<uint8_t> serializedPacket = packet->Serialize();
+        delete packet;
+        packet = nullptr;
 
         // Send packet
         ssize_t bytesSent = send(clientSocket, serializedPacket.data(), serializedPacket.size(), 0);
@@ -74,9 +78,6 @@ int connectTcpServer() {
             std::cout << "Checksum is incorrect" << std::endl;
         }
 
-        // Free memory
-        delete packet;
-        packet = nullptr;
         delete responsePacket;
         responsePacket = nullptr;
     }
