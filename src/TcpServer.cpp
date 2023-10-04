@@ -1,30 +1,6 @@
 #include "../include/PacketFactory.h"
 
-int connectTcpServer() {
-    int clientSocket;
-    struct sockaddr_in serverAddr;
-    char buffer[1024];
-
-    // Create socket
-    clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket == -1) {
-        std::cerr << "Error creating socket." << std::endl;
-        return 1;
-    }
-
-    // Configure server address
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(12345); // Server's port number
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); // Server's IP address
-
-    // Connect to the server
-    if (connect(clientSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) == -1) {
-        std::cerr << "Error connecting to server." << std::endl;
-        return 1;
-    }
-
-    std::cout << "Connected to the server." << std::endl;
-
+int sendPacket(int &clientSocket) {
     int choice;
     // Send and receive messages
     while (true) {
@@ -81,6 +57,36 @@ int connectTcpServer() {
         delete responsePacket;
         responsePacket = nullptr;
     }
+    return 0;
+}
+
+int connectTcpServer() {
+    int clientSocket;
+    struct sockaddr_in serverAddr;
+    char buffer[1024];
+
+    // Create socket
+    clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (clientSocket == -1) {
+        std::cerr << "Error creating socket." << std::endl;
+        return 1;
+    }
+
+    // Configure server address
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(12345); // Server's port number
+    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); // Server's IP address
+
+    // Connect to the server
+    if (connect(clientSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) == -1) {
+        std::cerr << "Error connecting to server." << std::endl;
+        return 1;
+    }
+
+    std::cout << "Connected to the server." << std::endl;
+
+    // Send data to the server
+    sendPacket(clientSocket);
 
     // Close the socket
     close(clientSocket);

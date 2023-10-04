@@ -13,9 +13,8 @@
 #include <openssl/md5.h>
 #include <boost/crc.hpp>
 
+int sendPacket(int &clientSocket);
 int connectTcpServer();
-uint16_t CalculateChecksum(const std::vector<uint8_t>& buffer);
-bool ValidateChecksum(std::vector<uint8_t> buffer, uint16_t& checksum);
 
 #endif
 
