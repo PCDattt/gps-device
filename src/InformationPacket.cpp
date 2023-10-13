@@ -39,7 +39,7 @@ void InformationPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const 
 }
 
 void InformationPacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {
-    result.process_bytes(&this->latitude, sizeof(this->latitude));
-    result.process_bytes(&this->longitude, sizeof(this->longitude));
+    result.process_bytes(std::to_string(latitude).c_str(), std::to_string(latitude).length());
+    result.process_bytes(std::to_string(longitude).c_str(), std::to_string(longitude).length());
 }
 

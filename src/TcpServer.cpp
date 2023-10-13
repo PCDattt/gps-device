@@ -75,7 +75,7 @@ int connectTcpServer() {
     // Configure server address
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_port = htons(12345); // Server's port number
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1"); // Server's IP address
+    serverAddr.sin_addr.s_addr = inet_addr("192.168.22.105"); // Server's IP address
 
     // Connect to the server
     if (connect(clientSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) == -1) {

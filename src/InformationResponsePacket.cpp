@@ -22,5 +22,5 @@ void InformationResponsePacket::PrintBodyInformation() {
 }
 
 void InformationResponsePacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {
-    result.process_bytes(&this->receivedPacketIndex, sizeof(this->receivedPacketIndex));
+    result.process_bytes(std::to_string(receivedPacketIndex).c_str(), std::to_string(receivedPacketIndex).length());
 }

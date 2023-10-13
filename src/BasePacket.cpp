@@ -182,10 +182,10 @@ void BasePacket::PrintInformation() {
 }
 
 void BasePacket::ProcessPacketStartingForChecksum(boost::crc_32_type &result) {
-    result.process_bytes(&startMarker, sizeof(startMarker));
-    result.process_bytes(&packetId, sizeof(packetId));
+    result.process_bytes(std::to_string(startMarker).c_str(), std::to_string(startMarker).length());
+    result.process_bytes(std::to_string(packetId).c_str(), std::to_string(packetId).length());
     result.process_bytes(deviceId.c_str(), deviceId.length());
-    result.process_bytes(&packetOrderIndex, sizeof(packetOrderIndex));
+    result.process_bytes(std::to_string(packetOrderIndex).c_str(), std::to_string(packetOrderIndex).length());
 }
 
 uint16_t BasePacket::CalculateChecksum() {
