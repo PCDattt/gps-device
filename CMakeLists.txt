@@ -7,7 +7,7 @@ enable_testing()
 # add_executable(gps-device main.cpp source.cpp packet.cpp)
 add_executable(gps-device main.cpp src/PacketFactory.cpp src/BasePacket.cpp 
 src/TcpServer.cpp src/InformationPacket.cpp src/InformationResponsePacket.cpp
-src/LoginPacket.cpp src/LoginResponsePacket.cpp)
+src/ResponsePacket src/LoginPacket.cpp src/LoginResponsePacket.cpp)
 
 # Link OpenSSL libraries
 find_package(OpenSSL REQUIRED)
