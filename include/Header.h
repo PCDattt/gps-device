@@ -13,8 +13,10 @@
 #include <openssl/md5.h>
 #include <boost/crc.hpp>
 
-int sendPacket(int &clientSocket);
+int sendPacket(int &clientSocket, uint16_t packetId);
+int receivePacket(int &clientSocket, uint16_t packetId);
 int connectTcpServer();
+int communicateServer(int &clientSocket);
 
 #endif
 
