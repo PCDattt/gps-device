@@ -62,6 +62,14 @@ void BasePacket::SerializeUInt32(std::vector<uint8_t>& buffer, uint32_t value) c
     buffer.push_back(static_cast<uint8_t>(value & 0xFF));
 }
 
+// Helper function to serialize a int32_t into the buffer
+void BasePacket::SerializeInt32(std::vector<uint8_t>& buffer, int32_t value) const {
+    buffer.push_back(static_cast<uint8_t>((value >> 24) & 0xFF));
+    buffer.push_back(static_cast<uint8_t>((value >> 16) & 0xFF));
+    buffer.push_back(static_cast<uint8_t>((value >> 8) & 0xFF));
+    buffer.push_back(static_cast<uint8_t>(value & 0xFF));
+}
+
 // Helper function to serialize a string into the buffer
 void BasePacket::SerializeString(std::vector<uint8_t>& buffer, const std::string& value) const {
     // Serialize the string length as a uint16_t
@@ -110,7 +118,7 @@ bool BasePacket::DeserializeString(const std::vector<uint8_t>& buffer, size_t& o
 
 void BasePacket::FillStartingInformation() {
     startMarker = 0x0001;
-    deviceId = "123456";
+    deviceId = "123";
     packetOrderIndex = 1;
 }
 

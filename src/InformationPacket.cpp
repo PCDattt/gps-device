@@ -1,18 +1,18 @@
 #include "../include/InformationPacket.h"
 
-void InformationPacket::setLatitude(uint32_t latitude) {
+void InformationPacket::setLatitude(int32_t latitude) {
     this->latitude = latitude;
 }
 
-void InformationPacket::setLongitude(uint32_t longitude) {
+void InformationPacket::setLongitude(int32_t longitude) {
     this->longitude = longitude;
 }
 
-uint32_t InformationPacket::getLatitude() const {
+int32_t InformationPacket::getLatitude() const {
     return latitude;
 }
 
-uint32_t InformationPacket::getLongitude() const {
+int32_t InformationPacket::getLongitude() const {
     return longitude;
 }
 
@@ -34,8 +34,8 @@ std::vector<uint8_t> InformationPacket::GetPacketBuffer() const {
 }
 
 void InformationPacket::SerializePacketBody(std::vector<uint8_t>& buffer) const {
-    SerializeUInt32(buffer, latitude);
-    SerializeUInt32(buffer, longitude);
+    SerializeInt32(buffer, latitude);
+    SerializeInt32(buffer, longitude);
 }
 
 void InformationPacket::ProcessPacketBodyForChecksum(boost::crc_32_type &result) {

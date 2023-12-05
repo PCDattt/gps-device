@@ -29,6 +29,7 @@ public:
 
     void SerializeUInt16(std::vector<uint8_t>& buffer, uint16_t value) const;
     void SerializeUInt32(std::vector<uint8_t>& buffer, uint32_t value) const;
+    void SerializeInt32(std::vector<uint8_t>& buffer, int32_t value) const;
     void SerializeString(std::vector<uint8_t>& buffer, const std::string& value) const;
     bool DeserializeUInt16(const std::vector<uint8_t>& buffer, size_t& offset, uint16_t& value) const;
     bool DeserializeUInt32(const std::vector<uint8_t>& buffer, size_t& offset, uint32_t& value) const;
